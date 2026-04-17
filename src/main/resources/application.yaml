@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  data:
+    mongodb:
+      uri: ${URI}
+  application:
+    name: pratica-sistema-produtos
+    version: 1.0.0
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+  api-docs:
+    path: /openapi
