@@ -4,15 +4,19 @@ services:
   mongo:
     image: mongo:7.0
     environment:
-      MONGO_INITDB_ROOT_USERNAME: adm
-      MONGO_INITDB_ROOT_PASSWORD: adm123
-      MONGO_INITDB_DATABASE: sistema_produtos
+      MONGO_INITDB_ROOT_USERNAME: ~{.Env.MONGO_INITDB_ROOT_USERNAME }
+      MONGO_INITDB_ROOT_PASSWORD: ~{.Env.MONGO_INITDB_ROOT_PASSWORD }
+      MONGO_INITDB_DATABASE: ~{ .Env.MONGO_INITDB_DATABASE }
     ports:
       - "27017:27017"
 
   app:
-    image: pratica-sistema-produtos
+    build: .
     env_file:
       - .env
+    ports:
+      - "8081:8081"
     depends_on:
       - mongo
+    environment:
+      URI: ~{ .Env.URI}
